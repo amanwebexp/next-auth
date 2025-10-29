@@ -1,3 +1,5 @@
 # Auto detect text files and perform LF normalization
 *.js linguist-language=JSX
 *.jsx linguist-language=JSX
+*.ts linguist-language=TSX
+*.tsx linguist-language=TSX
