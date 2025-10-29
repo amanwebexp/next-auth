@@ -36,7 +36,6 @@ Navigate to your project directory and install the necessary npm packages:
 ```
 or
 ```bash
-```bash
   npm install --force
 ```
 ```
