@@ -3,16 +3,15 @@
 import userDetail from "@/services/UserDetail";
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 
 const ProductDetail = ({ params }) => {
-  const { id } = params;
-  const { data: session } = useSession();
+  const { id } = params; // ✅ Extract product ID from route params
+  const { data: session } = useSession(); // ✅ Access logged-in user session
 
   const [singleProduct, setSingleProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  const fetchProduct = async () => {
+  const [loading, setLoading] = useState(true); // ✅ Loading state for API call
+  // ✅ Fetch product details from API using product ID
+  const fetchSingleProduct = async () => {
     if (!session) return;
 
     try {
@@ -25,15 +24,16 @@ const ProductDetail = ({ params }) => {
       setLoading(false);
     }
   };
-
+  // ✅ Fetch product data whenever session changes (user logs in/out)
   useEffect(() => {
-    fetchProduct();
+    fetchSingleProduct();
   }, [session]);
+  // ✅ Handle loading and empty product states
 
   if (loading) return <div className="p-8 text-center">Loading...</div>;
   if (!singleProduct)
     return <div className="p-8 text-center">Product not found.</div>;
-
+  // ✅ Destructure product fields for easier access
   const {
     title,
     description,

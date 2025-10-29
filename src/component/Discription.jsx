@@ -47,14 +47,10 @@ export const FeatureCard = ({ title, description }) => (
       spacing={3}
       sx={{
         color:"white",
-        // backgroundColor: "white",
-        // boxShadow: 3,
-        // borderRadius: 1,
         p: 2,
         mt: 2,
       }}
       columnSpacing={3}
-    //    className="rounded-md border-2  "
     >
       <Typography variant="h6" sx={{ mt: 2 }}>
         {title}

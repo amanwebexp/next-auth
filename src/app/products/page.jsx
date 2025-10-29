@@ -20,20 +20,26 @@ import { errorMsg } from "@/component/Toastmsg/toaster";
 import userDetail from "@/services/UserDetail"; // ✅ Uses your ApiClient wrapper
 
 const Page = () => {
+  // ✅ State variables for products, error handling, and UI loading control
+
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
   const [hasShownSuccess, setHasShownSuccess] = useState(false);
   const [loading, setLoading] = useState(true);
+  // ✅ Access current session data from NextAuth
 
   const { data: session, status } = useSession();
+  // ✅ Track successful authentication (runs once when session is authenticated)
 
   useEffect(() => {
     if (status === "authenticated" && !hasShownSuccess) {
       setHasShownSuccess(true);
     }
   }, [status, hasShownSuccess]);
+  // ✅ Fetch all products from the API
+
   const fetchProducts = async () => {
-    if (!session) return;
+    if (!session) return; // Stop if user is not authenticated
 
     try {
       setLoading(true);
@@ -46,10 +52,12 @@ const Page = () => {
       setLoading(false);
     }
   };
+  // ✅ Trigger product fetch whenever user session is ready
+
   useEffect(() => {
     fetchProducts();
   }, [session]);
-
+  // ✅ Show loading spinner during data fetch or session loading
   if (status === "loading" || loading) {
     return (
       <Box
@@ -62,7 +70,7 @@ const Page = () => {
       </Box>
     );
   }
-
+  // ✅ Handle API or network error state
   if (error) {
     return (
       <Typography color="error" align="center" sx={{ mt: 5 }}>
@@ -70,6 +78,7 @@ const Page = () => {
       </Typography>
     );
   }
+  // ✅ Handle empty product list case
 
   if (products.length === 0) {
     return (

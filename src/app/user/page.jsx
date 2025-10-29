@@ -7,23 +7,28 @@ import userDetail from "@/services/UserDetail";
 import { Container, CircularProgress, Typography } from "@mui/material";
 
 const Welcome = () => {
+  // State to hold all user data fetched from API
   const [userData, setUserData] = useState([]);
+  // Get session info from NextAuth
   const { data: session, status } = useSession();
-
+  // Fetch users once session is available
   useEffect(() => {
     const fetchUser = async () => {
-      if (!session) return;
+      if (!session) return; // Wait until session is ready
 
       try {
+        // ✅ Call API service to fetch users
         const dataUser = await userDetail.getAllUser();
         setUserData(dataUser?.users || []);
       } catch (error) {
+        // ❌ Show toast error message if API call fails
         errorMsg(error?.message || "Failed to fetch users");
       }
     };
 
     fetchUser();
   }, [session]);
+  // Show loading spinner while session is initializing
 
   if (status === "loading") {
     return (

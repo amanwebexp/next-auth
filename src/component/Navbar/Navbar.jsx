@@ -14,6 +14,7 @@ import { useSession } from "next-auth/react";
 import { routesUrl } from "@/utils/pagesurl";
 import { usePathname } from "next/navigation";
 import LogoutButton from "../shared/form/LogoutButton";
+
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -23,6 +24,7 @@ function ResponsiveAppBar() {
   if (pathname === routesUrl.signIn) {
     return;
   }
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -36,24 +38,26 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static" sx={{backgroundColor:"#ffffff"}} className="bg-transparent shadow-none">
+    <AppBar
+      position="static"
+      sx={{ backgroundColor: "#ffffff" }}
+      className="bg-transparent shadow-none"
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <IconButton
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: "black" }}
-            >
-              <Link href={routesUrl.home}>
-                <Typography>Home</Typography>
-              </Link>
-            </IconButton>
-            <IconButton
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: "black" }}
-            >
-            </IconButton>
-            {session ? (
+            {!session && (
+              <IconButton
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "black" }}
+              >
+                <Link href={routesUrl.home}>
+                  <Typography>Home</Typography>
+                </Link>
+              </IconButton>
+            )}
+
+            {session && (
               <>
                 <IconButton
                   onClick={handleCloseNavMenu}
@@ -72,25 +76,27 @@ function ResponsiveAppBar() {
                   </Link>
                 </IconButton>
               </>
-            ) : (
-              <></>
             )}
           </Box>
-          <Typography className="mr-2" color="black">
-            {session?.user.email || session?.user?.id}
-          </Typography>
+
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title={session ? "Sign out" : "Sign in"}>
-              {session ? (
-                <>
-                  <LogoutButton />
-                </>
-              ) : (
-                <Link href={routesUrl.signIn}>
-                  <Typography color="black">Sign In</Typography>
-                </Link>
+            <div className="flex items-center gap-10">
+              {session && (
+                <Typography color="black" className="text-sm font-medium">
+                  {session?.user?.email || session?.user?.id}
+                </Typography>
               )}
-            </Tooltip>
+              <Tooltip title={session ? "Sign out" : "Sign in"}>
+                {session ? (
+                  <LogoutButton />
+                ) : (
+                  <Link href={routesUrl.signIn}>
+                    <Typography color="black">Sign In</Typography>
+                  </Link>
+                )}
+              </Tooltip>
+            </div>
+
             <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"
@@ -107,9 +113,7 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {session ? (
-                <MenuItem onClick={handleCloseUserMenu}></MenuItem>
-              ) : null}
+              {session && <MenuItem onClick={handleCloseUserMenu}></MenuItem>}
             </Menu>
           </Box>
         </Toolbar>
@@ -119,4 +123,3 @@ function ResponsiveAppBar() {
 }
 
 export default ResponsiveAppBar;
-

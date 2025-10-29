@@ -5,12 +5,14 @@ import TwitterProvider from "next-auth/providers/twitter";
 import GitHubProvider from "next-auth/providers/github";
 import { routesUrl } from "@/utils/pagesurl";
 const handler = NextAuth({
+  // 🔹 Define all authentication providers (OAuth + Credentials)
   providers: [
+    // ✅ Google authentication configuration
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       authorization: {
-        // It will force the Refresh Token to always be provided on sign in
+        // Force consent screen every time to get a refresh token
         params: {
           prompt: "consent",
           access_type: "offline",
@@ -18,11 +20,13 @@ const handler = NextAuth({
         },
       },
     }),
+    // ✅ Twitter authentication configuration (OAuth 2.0)
     TwitterProvider({
       clientId: process.env.TWITTER_CLIENT_ID,
       clientSecret: process.env.TWITTER_CLIENT_SECRET,
       version: "2.0",
     }),
+    // GitHub OAuth provider setup
     GitHubProvider({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
@@ -35,9 +39,10 @@ const handler = NextAuth({
         },
       },
     }),
+    // Credentials-based custom login (username/password)
     Credentials({
       async authorize(credentials, req) {
-
+        // Send credentials to backend API for authentication
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_BASE_URL}/auth/login`,
           {
@@ -50,6 +55,7 @@ const handler = NextAuth({
         const user = await res.json();
 
         if (!res.ok) throw new Error("Network response was not ok");
+        // Return user data if authentication successful
         if (res.ok && user)
           return {
             id: user.id,
@@ -62,14 +68,20 @@ const handler = NextAuth({
       },
     }),
   ],
+  // Define custom sign-in page route
   pages: {
     signIn: routesUrl.signIn,
   },
+  // Define NextAuth callback functions
+
   callbacks: {
+    // Modify JWT token before storing it
     async jwt({ token, user, account }) {
-      // the user present here gets the same data as received from DB call  made above -> fetchUserInfo(credentials.opt)
+      // Merge existing token with user and account info
+
       return { ...token, ...user, ...account };
     },
+    // Control what session data is exposed to the client
     async session({ token }) {
       return {
         user: {
@@ -85,4 +97,5 @@ const handler = NextAuth({
     },
   },
 });
+// Export handler for both GET and POST requests (required by NextAuth)
 export { handler as GET, handler as POST };
