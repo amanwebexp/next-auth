@@ -62,23 +62,23 @@ Create a `.env` file in your project root and add the following credentials:
 
 ```bash
 # NextAuth Configuration
-NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_URL=https://YOUR_DOMAIN_URL/
 NEXTAUTH_SECRET=454B
 
 # Base URL for API calls
 NEXT_PUBLIC_BASE_URL=https://dummyjson.com
 
 # GitHub Provider
-GITHUB_ID=ghp_1234567890abcdef1234
-GITHUB_SECRET=ghs_abcdef1234567890abcdef1234
+GITHUB_ID=ghp_1234567**********
+GITHUB_SECRET=ghs_abcdef123456**********
 
 # Twitter (X) Provider
-TWITTER_CLIENT_ID=tw_9876543210abcdef
-TWITTER_CLIENT_SECRET=ts_abcdef9876543210abcdef
+TWITTER_CLIENT_ID=tw_9876543*********
+TWITTER_CLIENT_SECRET=ts_abcdef987654********
 
 # Google Provider
-GOOGLE_CLIENT_ID=1234567890-abcdefg.apps.googleusercontent.com
-GOOGLE_CLIENT_SECRET=GOCSPX-abcdef1234567890abcdef
+GOOGLE_CLIENT_ID=123456*******-abcdefg.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=GOCSPX-abcdef12345***********
 ```
 ## Notes
   * Replace the dummy values with your actual credentials from each provider.
