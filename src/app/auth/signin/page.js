@@ -92,9 +92,9 @@ const Login = () => {
 
         <FormControl>
           <FormLabel>User Name</FormLabel>
-          <InputField control={control} name="username" required />
+          <InputField control={control} name="username"  />
           <Typography variant="body2" color="error" gutterBottom>
-            {errors?.email?.message}
+            {errors?.username?.message}
           </Typography>
         </FormControl>
 
