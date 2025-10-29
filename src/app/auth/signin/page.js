@@ -57,6 +57,7 @@ const Login = () => {
       sx={{
         width: 400,
         mx: "auto",
+        backgroundColor: "white",
         position: "absolute",
         top: "50%",
         left: "50%",
@@ -117,7 +118,7 @@ const Login = () => {
             <Button
               type="submit"
               fullWidth
-              className="bg-red-600 hover:bg-red-700 text-white font-bold cursor-pointer py-2 rounded-md transition duration-300"
+              className="!bg-red-600 !hover:bg-red-700 !text-white !font-bold !cursor-pointer !py-2 !rounded-md !transition !duration-300"
             >
               Login
             </Button>
