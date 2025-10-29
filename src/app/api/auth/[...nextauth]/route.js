@@ -7,7 +7,7 @@ import { routesUrl } from "@/utils/pagesurl";
 const handler = NextAuth({
   // 🔹 Define all authentication providers (OAuth + Credentials)
   providers: [
-    // ✅ Google authentication configuration
+    //  Google authentication configuration
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -20,7 +20,7 @@ const handler = NextAuth({
         },
       },
     }),
-    // ✅ Twitter authentication configuration (OAuth 2.0)
+    //  Twitter authentication configuration (OAuth 2.0)
     TwitterProvider({
       clientId: process.env.TWITTER_CLIENT_ID,
       clientSecret: process.env.TWITTER_CLIENT_SECRET,

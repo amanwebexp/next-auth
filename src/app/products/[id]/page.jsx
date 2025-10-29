@@ -5,12 +5,12 @@ import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 
 const ProductDetail = ({ params }) => {
-  const { id } = params; // ✅ Extract product ID from route params
-  const { data: session } = useSession(); // ✅ Access logged-in user session
+  const { id } = params; //  Extract product ID from route params
+  const { data: session } = useSession(); //  Access logged-in user session
 
   const [singleProduct, setSingleProduct] = useState(null);
-  const [loading, setLoading] = useState(true); // ✅ Loading state for API call
-  // ✅ Fetch product details from API using product ID
+  const [loading, setLoading] = useState(true); //  Loading state for API call
+  //  Fetch product details from API using product ID
   const fetchSingleProduct = async () => {
     if (!session) return;
 
@@ -24,16 +24,16 @@ const ProductDetail = ({ params }) => {
       setLoading(false);
     }
   };
-  // ✅ Fetch product data whenever session changes (user logs in/out)
+  //  Fetch product data whenever session changes (user logs in/out)
   useEffect(() => {
     fetchSingleProduct();
   }, [session]);
-  // ✅ Handle loading and empty product states
+  //  Handle loading and empty product states
 
   if (loading) return <div className="p-8 text-center">Loading...</div>;
   if (!singleProduct)
     return <div className="p-8 text-center">Product not found.</div>;
-  // ✅ Destructure product fields for easier access
+  //  Destructure product fields for easier access
   const {
     title,
     description,
@@ -59,9 +59,9 @@ const ProductDetail = ({ params }) => {
   } = singleProduct;
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
+    <div className="!max-w-6xl !mx-auto !p-6">
       {/* Product Header */}
-      <div className="flex flex-col md:flex-row gap-10 bg-white shadow-md rounded-lg p-6">
+      <div className="!flex flex-col md:flex-row gap-10 bg-white shadow-md rounded-lg p-6">
         {/* Image */}
         <div className="flex-1">
           <img

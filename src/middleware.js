@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 import { routesUrl } from "./utils/pagesurl";
-// 🧭 Define which routes are protected (require authentication)
+// Define which routes are protected (require authentication)
 export const ProtectedRoutes = [routesUrl.products, routesUrl.user];
-// 🚪 Define public routes (accessible without login)
+// Define public routes (accessible without login)
 export const UnprotectedRoutes = [routesUrl.signIn];
 
 // Middleware function
@@ -28,10 +28,10 @@ export async function middleware(request) {
     const redirectUrl = UnprotectedRoutes[0];
     return NextResponse.redirect(new URL(redirectUrl, request.url));
   }
-    // ✅ Allow request to proceed if route access is valid
+    // Allow request to proceed if route access is valid
   return NextResponse.next();
 }
-// 🧩 Apply middleware only to protected routes
+// Apply middleware only to protected routes
 export const config = {
   matcher: [ProtectedRoutes],
 };

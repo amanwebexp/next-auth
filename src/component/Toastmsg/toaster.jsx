@@ -1,7 +1,7 @@
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 
-// ❌ Function to display error toast message
+// Function to display error toast message
 export const errorMsg = (message) => {
   toast.error(message, {
     position: "top-right",
@@ -16,7 +16,7 @@ export const errorMsg = (message) => {
   });
 };
 
-// ✅ Function to display success toast message
+// Function to display success toast message
 export const successMsg = (message) => {
   toast.success(message, {
     position: "top-right",

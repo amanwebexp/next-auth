@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { routesUrl } from "@/utils/pagesurl";
 import InputField from "../../../component/shared/form/InputField";
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import GoogleIcon from "@mui/icons-material/Google";
 import XIcon from "@mui/icons-material/X";
 import GitHubIcon from "@mui/icons-material/GitHub";
@@ -92,7 +92,7 @@ const Login = () => {
 
         <FormControl>
           <FormLabel>User Name</FormLabel>
-          <InputField control={control} name="username"  />
+          <InputField control={control} name="username" />
           <Typography variant="body2" color="error" gutterBottom>
             {errors?.username?.message}
           </Typography>

@@ -17,11 +17,11 @@ const Welcome = () => {
       if (!session) return; // Wait until session is ready
 
       try {
-        // ✅ Call API service to fetch users
+        //  Call API service to fetch users
         const dataUser = await userDetail.getAllUser();
         setUserData(dataUser?.users || []);
       } catch (error) {
-        // ❌ Show toast error message if API call fails
+        //  Show toast error message if API call fails
         errorMsg(error?.message || "Failed to fetch users");
       }
     };
@@ -32,7 +32,7 @@ const Welcome = () => {
 
   if (status === "loading") {
     return (
-      <Container className="flex items-center justify-center min-h-screen">
+      <Container className="!flex items-center justify-center min-h-screen">
         <CircularProgress />
       </Container>
     );
@@ -41,7 +41,7 @@ const Welcome = () => {
   const currentUserEmail = session?.user?.email;
 
   return (
-    <Container className="max-w-full">
+    <Container className="!max-w-full">
       <div className="p-4">
         <Typography variant="h5" gutterBottom>
           User List:
