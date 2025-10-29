@@ -103,6 +103,6 @@ GOOGLE_CLIENT_SECRET=GOCSPX-abcdef1234567890abcdef
 ## GitHub
  * Go to GitHub Developer Settings
  * Click New OAuth App.
- * Set Homepage URL: http://localhost:3000
+ * Set Homepage URL: https://YOUR_DOMAIN_URL
  * Set Authorization callback URL: https://YOUR_DOMAIN_URL/api/auth/callback/github
  * Copy your Client ID and Client Secret into .env .
