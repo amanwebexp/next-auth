@@ -12,7 +12,8 @@
 
 # testing
 /coverage
-
+# npm lock file
+package-lock.json
 # next.js
 /.next/
 /out/
