@@ -33,9 +33,13 @@ Navigate to your project directory and install the necessary npm packages:
 
 ```bash
   npm install 
-  cd my-project
 ```
-
+or
+```bash
+```bash
+  npm install --force
+```
+```
 ## Project Scope
 The primary goal of this project is to authenticate users and grant access to pages that require user verification. By integrating NextAuth.js with multiple OAuth providers, this project ensures a secure and user-friendly sign-in process.
 
